@@ -7,28 +7,28 @@
 [![Conventional Commits](https://img.shields.io/badge/Conventional%20Commits-1.0.0-%23FE5196?logo=conventionalcommits&logoColor=white&style=for-the-badge)](https://conventionalcommits.org)
 [![Commitizen friendly](https://img.shields.io/badge/commitizen-friendly-brightgreen.svg?style=for-the-badge)](http://commitizen.github.io/cz-cli/)
 
-AstroPaper is a minimal, responsive, accessible and SEO-friendly Astro blog theme. This theme is designed and crafted based on [my personal blog](https://satnaing.dev/blog).
+AstroPaper 是一个极简、响应式、无障碍且对 SEO 友好的 Astro 博客主题。该主题基于 [我的个人博客](https://satnaing.dev/blog) 设计与开发。
 
-Read [the blog posts](https://astro-paper.pages.dev/posts/) or check [the README Documentation Section](#-documentation) for more info.
+可以先阅读 [示例博客文章](https://astro-paper.pages.dev/posts/) ，或直接查看 [README 文档章节](#-文档) 了解更多。
 
-## 🔥 Features
+## 🔥 特性
 
-- [x] type-safe markdown
-- [x] super fast performance
-- [x] accessible (Keyboard/VoiceOver)
-- [x] responsive (mobile ~ desktops)
-- [x] SEO-friendly
-- [x] light & dark mode
-- [x] fuzzy search
-- [x] draft posts & pagination
-- [x] sitemap & rss feed
-- [x] followed best practices
-- [x] highly customizable
-- [x] dynamic OG image generation for blog posts [#15](https://github.com/satnaing/astro-paper/pull/15) ([Blog Post](https://astro-paper.pages.dev/posts/dynamic-og-image-generation-in-astropaper-blog-posts/))
+- [x] 类型安全的 Markdown 内容
+- [x] 极快的性能
+- [x] 无障碍支持（键盘/VoiceOver）
+- [x] 响应式布局（移动端到桌面端）
+- [x] SEO 友好
+- [x] 明暗主题切换
+- [x] 模糊搜索
+- [x] 草稿文章与分页
+- [x] 网站地图与 RSS
+- [x] 遵循最佳实践
+- [x] 高可定制性
+- [x] 为博客文章动态生成 OG 图片 [#15](https://github.com/satnaing/astro-paper/pull/15)（[博客说明](https://astro-paper.pages.dev/posts/dynamic-og-image-generation-in-astropaper-blog-posts/)）
 
-_Note: I've tested screen-reader accessibility of AstroPaper using **VoiceOver** on Mac and **TalkBack** on Android. I couldn't test all other screen-readers out there. However, accessibility enhancements in AstroPaper should be working fine on others as well._
+_说明：作者已在 Mac 上使用 **VoiceOver**、在 Android 上使用 **TalkBack** 对 AstroPaper 的可访问性进行测试。虽然无法覆盖所有读屏器，但相关无障碍增强在其他读屏器中通常也能正常工作。_
 
-## ✅ Lighthouse Score
+## ✅ Lighthouse 评分
 
 <p align="center">
   <a href="https://pagespeed.web.dev/report?url=https%3A%2F%2Fastro-paper.pages.dev%2F&form_factor=desktop">
@@ -36,14 +36,14 @@ _Note: I've tested screen-reader accessibility of AstroPaper using **VoiceOver**
   </a>
 </p>
 
-## 🚀 Project Structure
+## 🚀 项目结构
 
-Inside of AstroPaper, you'll see the following folders and files:
+在 AstroPaper 中，主要目录结构如下：
 
 ```bash
 /
 ├── public/
-│   ├── pagefind/ # auto-generated when build
+│   ├── pagefind/ # build 时自动生成
 │   ├── favicon.svg
 │   └── astropaper-og.jpg
 ├── src/
@@ -67,37 +67,37 @@ Inside of AstroPaper, you'll see the following folders and files:
 └── astro.config.ts
 ```
 
-Astro looks for `.astro` or `.md` files in the `src/pages/` directory. Each page is exposed as a route based on its file name.
+Astro 会在 `src/pages/` 目录中查找 `.astro` 或 `.md` 文件，并按文件名自动映射路由。
 
-Any static assets, like images, can be placed in the `public/` directory.
+静态资源（例如图片）可放在 `public/` 目录。
 
-All blog posts are stored in `src/data/blog` directory.
+所有博客文章都存放在 `src/data/blog/` 目录。
 
-## 📖 Documentation
+## 📖 文档
 
-Documentation can be read in two formats\_ _markdown_ & _blog post_.
+文档提供两种形式：_markdown_ 与 _博客文章_。
 
 - Configuration - [markdown](src/data/blog/how-to-configure-astropaper-theme.md) | [blog post](https://astro-paper.pages.dev/posts/how-to-configure-astropaper-theme/)
 - Add Posts - [markdown](src/data/blog/adding-new-post.md) | [blog post](https://astro-paper.pages.dev/posts/adding-new-posts-in-astropaper-theme/)
 - Customize Color Schemes - [markdown](src/data/blog/customizing-astropaper-theme-color-schemes.md) | [blog post](https://astro-paper.pages.dev/posts/customizing-astropaper-theme-color-schemes/)
 - Predefined Color Schemes - [markdown](src/data/blog/predefined-color-schemes.md) | [blog post](https://astro-paper.pages.dev/posts/predefined-color-schemes/)
 
-## 💻 Tech Stack
+## 💻 技术栈
 
-**Main Framework** - [Astro](https://astro.build/)  
-**Type Checking** - [TypeScript](https://www.typescriptlang.org/)  
-**Styling** - [TailwindCSS](https://tailwindcss.com/)  
-**UI/UX** - [Figma Design File](https://www.figma.com/community/file/1356898632249991861)  
-**Static Search** - [FuseJS](https://pagefind.app/)  
-**Icons** - [Tablers](https://tabler-icons.io/)  
-**Code Formatting** - [Prettier](https://prettier.io/)  
-**Deployment** - [Cloudflare Pages](https://pages.cloudflare.com/)  
-**Illustration in About Page** - [https://freesvgillustration.com](https://freesvgillustration.com/)  
-**Linting** - [ESLint](https://eslint.org)
+**主框架** - [Astro](https://astro.build/)  
+**类型检查** - [TypeScript](https://www.typescriptlang.org/)  
+**样式** - [TailwindCSS](https://tailwindcss.com/)  
+**UI/UX** - [Figma 设计文件](https://www.figma.com/community/file/1356898632249991861)  
+**静态搜索** - [FuseJS](https://pagefind.app/)  
+**图标** - [Tablers](https://tabler-icons.io/)  
+**代码格式化** - [Prettier](https://prettier.io/)  
+**部署** - [Cloudflare Pages](https://pages.cloudflare.com/)  
+**关于页插图** - [https://freesvgillustration.com](https://freesvgillustration.com/)  
+**代码检查** - [ESLint](https://eslint.org)
 
-## 👨🏻‍💻 Running Locally
+## 👨🏻‍💻 本地运行
 
-You can start using this project locally by running the following command in your desired directory:
+你可以在目标目录通过以下命令创建此项目：
 
 ```bash
 # pnpm
@@ -113,67 +113,74 @@ yarn create astro --template satnaing/astro-paper
 bun create astro@latest -- --template satnaing/astro-paper
 ```
 
-Then start the project by running the following commands:
+然后执行以下命令启动项目：
 
 ```bash
-# install dependencies if you haven't done so in the previous step.
+# 若上一步未安装依赖，请先安装
 pnpm install
 
-# start running the project
+# 启动开发服务器
 pnpm run dev
 ```
 
-As an alternative approach, if you have Docker installed, you can use Docker to run this project locally. Here's how:
+快速新建文章（Hugo 风格）：
 
 ```bash
-# Build the Docker image
+pnpm new:post "Your Post Title"
+```
+
+如果你已安装 Docker，也可以用 Docker 在本地运行：
+
+```bash
+# 构建 Docker 镜像
 docker build -t astropaper .
 
-# Run the Docker container
+# 运行 Docker 容器
 docker run -p 4321:80 astropaper
 ```
 
-## Google Site Verification (optional)
+## Google Site Verification（可选）
 
-You can easily add your [Google Site Verification HTML tag](https://support.google.com/webmasters/answer/9008080#meta_tag_verification&zippy=%2Chtml-tag) in AstroPaper using an environment variable. This step is optional. If you don't add the following environment variable, the google-site-verification tag won't appear in the HTML `<head>` section.
+你可以通过环境变量为 AstroPaper 添加 [Google Site Verification HTML 标签](https://support.google.com/webmasters/answer/9008080#meta_tag_verification&zippy=%2Chtml-tag)。这是可选步骤；若不配置下列环境变量，`<head>` 中不会输出 `google-site-verification` 标签。
 
 ```bash
-# in your environment variable file (.env)
+# 在环境变量文件中（.env）
 PUBLIC_GOOGLE_SITE_VERIFICATION=your-google-site-verification-value
 ```
 
-> See [this discussion](https://github.com/satnaing/astro-paper/discussions/334#discussioncomment-10139247) for adding AstroPaper to the Google Search Console.
+> 可参考 [这个讨论](https://github.com/satnaing/astro-paper/discussions/334#discussioncomment-10139247) 将 AstroPaper 添加到 Google Search Console。
 
-## 🧞 Commands
+## 🧞 命令
 
-All commands are run from the root of the project, from a terminal:
+所有命令都在项目根目录执行。
 
-> **_Note!_** For `Docker` commands we must have it [installed](https://docs.docker.com/engine/install/) in your machine.
+> **说明：** 使用 `Docker` 相关命令前，请确保本机已安装 [Docker](https://docs.docker.com/engine/install/)。
 
-| Command                              | Action                                                                                                                           |
-| :----------------------------------- | :------------------------------------------------------------------------------------------------------------------------------- |
-| `pnpm install`                       | Installs dependencies                                                                                                            |
-| `pnpm run dev`                       | Starts local dev server at `localhost:4321`                                                                                      |
-| `pnpm run build`                     | Build your production site to `./dist/`                                                                                          |
-| `pnpm run preview`                   | Preview your build locally, before deploying                                                                                     |
-| `pnpm run format:check`              | Check code format with Prettier                                                                                                  |
-| `pnpm run format`                    | Format codes with Prettier                                                                                                       |
-| `pnpm run sync`                      | Generates TypeScript types for all Astro modules. [Learn more](https://docs.astro.build/en/reference/cli-reference/#astro-sync). |
-| `pnpm run lint`                      | Lint with ESLint                                                                                                                 |
-| `docker compose up -d`               | Run AstroPaper on docker, You can access with the same hostname and port informed on `dev` command.                              |
-| `docker compose run app npm install` | You can run any command above into the docker container.                                                                         |
-| `docker build -t astropaper .`       | Build Docker image for AstroPaper.                                                                                               |
-| `docker run -p 4321:80 astropaper`   | Run AstroPaper on Docker. The website will be accessible at `http://localhost:4321`.                                             |
+| Command                              | Action                                                          |
+| :----------------------------------- | :-------------------------------------------------------------- |
+| `pnpm install`                       | 安装依赖                                                        |
+| `pnpm run dev`                       | 启动本地开发服务（`localhost:4321`）                            |
+| `pnpm run build`                     | 构建生产产物到 `./dist/`                                        |
+| `pnpm run preview`                   | 本地预览构建结果                                                |
+| `pnpm new:post "Your Post Title"`    | 在 `src/data/blog/` 中创建带 frontmatter 和章节骨架的新文章     |
+| `pnpm run format:check`              | 使用 Prettier 检查格式                                          |
+| `pnpm run format`                    | 使用 Prettier 自动格式化                                        |
+| `pnpm run sync`                      | 生成 Astro 模块 TypeScript 类型定义                             |
+| `pnpm run lint`                      | 使用 ESLint 做代码检查                                          |
+| `docker compose up -d`               | 在 Docker 中运行 AstroPaper                                     |
+| `docker compose run app npm install` | 在 Docker 容器中执行任意命令                                    |
+| `docker build -t astropaper .`       | 构建 AstroPaper Docker 镜像                                     |
+| `docker run -p 4321:80 astropaper`   | 运行 AstroPaper Docker 容器（访问地址 `http://localhost:4321`） |
 
-> **_Warning!_** Windows PowerShell users may need to install the [concurrently package](https://www.npmjs.com/package/concurrently) if they want to [run diagnostics](https://docs.astro.build/en/reference/cli-reference/#astro-check) during development (`astro check --watch & astro dev`). For more info, see [this issue](https://github.com/satnaing/astro-paper/issues/113).
+> **注意：** Windows PowerShell 用户如果想在开发中运行诊断（`astro check --watch & astro dev`），可能需要安装 [concurrently](https://www.npmjs.com/package/concurrently)。详见 [issue](https://github.com/satnaing/astro-paper/issues/113)。
 
-## ✨ Feedback & Suggestions
+## ✨ 反馈与建议
 
-If you have any suggestions/feedback, you can contact me via [my email](mailto:contact@satnaing.dev). Alternatively, feel free to open an issue if you find bugs or want to request new features.
+如果你有建议或反馈，可以通过 [邮箱](mailto:contact@satnaing.dev) 联系作者。也欢迎直接提 issue 报告 bug 或提出新功能请求。
 
-## 📜 License
+## 📜 许可证
 
-Licensed under the MIT License, Copyright © 2025
+基于 MIT License，Copyright © 2025
 
 ---
 
