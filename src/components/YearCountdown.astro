@@ -12,7 +12,9 @@
       </h2>
     </div>
     <p class="text-right text-sm text-foreground/80">
-      已过去 <span class="font-semibold text-foreground" data-elapsed-label>--</span>
+      已过去 <span class="font-semibold text-foreground" data-elapsed-label
+        >--</span
+      >
     </p>
   </div>
 
@@ -26,7 +28,8 @@
         class="h-full rounded-full bg-gradient-to-r from-accent via-sky-500 to-teal-500 transition-[width] duration-700 ease-out"
         style="width: 0%"
         data-progress-bar
-      ></div>
+      >
+      </div>
     </div>
   </div>
 
@@ -154,18 +157,22 @@
   };
 
   const bootYearCountdown = () => {
-    document.querySelectorAll<HTMLElement>("[data-year-countdown]").forEach(root => {
-      initCountdown(root);
-    });
+    document
+      .querySelectorAll<HTMLElement>("[data-year-countdown]")
+      .forEach(root => {
+        initCountdown(root);
+      });
   };
 
   const clearYearCountdownTimers = () => {
-    document.querySelectorAll<HTMLElement>("[data-year-countdown]").forEach(root => {
-      const timer = countdownTimers.get(root);
-      if (timer) {
-        window.clearInterval(timer);
-      }
-    });
+    document
+      .querySelectorAll<HTMLElement>("[data-year-countdown]")
+      .forEach(root => {
+        const timer = countdownTimers.get(root);
+        if (timer) {
+          window.clearInterval(timer);
+        }
+      });
   };
 
   document.addEventListener("astro:before-swap", clearYearCountdownTimers);

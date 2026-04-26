@@ -142,7 +142,7 @@ public class Main {
 2. 依赖注入
 3. setBeanName 执行了 user
 4. setBeanFactory 执行了 org.springframework.beans.factory.support.DefaultListableBeanFactory
-5. setApplicationContext 执行了 
+5. setApplicationContext 执行了
 6. postProcessBeforeInitialization user = com.example.config.User@688d411b
 7. init() 方法执行了
 8. afterPropertiesSet() 方法执行了

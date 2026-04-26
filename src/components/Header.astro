@@ -149,6 +149,9 @@ const isActive = (path: string) => {
     const closeIcon = document.querySelector("#close-icon");
 
     if (!menuBtn || !menuItems || !menuIcon || !closeIcon) return;
+    if (menuBtn.getAttribute("data-nav-bound") === "true") return;
+
+    menuBtn.setAttribute("data-nav-bound", "true");
 
     menuBtn.addEventListener("click", () => {
       const openMenu = menuBtn.getAttribute("aria-expanded") === "true";

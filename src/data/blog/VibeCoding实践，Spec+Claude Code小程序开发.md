@@ -205,7 +205,7 @@ specify init my-project --no-git
 ## 将所有文档全部审核一遍,检测 spec.md、plan.md 和 tasks.md 之间的不一致性、重复、歧义和欠指定项，将有问题的点全部找出来，生成报告并协助修复。
 
 # 7. 开始编码
-/speckit.implement 
+/speckit.implement
 ## 开始写需求代码
 ```
 

@@ -31,6 +31,7 @@ tags:
 ### 1.2 关键日志
 
 **初期日志**（看似正常）：
+
 ```log
 2025-10-26T17:54:53.020 INFO - StreamingNode using ChatClient: DefaultChatClient
 2025-10-26T17:54:53.056 INFO - StreamingNode chatResponseFlux subscribed
@@ -38,6 +39,7 @@ tags:
 ```
 
 **后期日志**（发现数据发射）：
+
 ```log
 2025-10-26T18:02:37.823 INFO - StreamingNode chatResponseFlux emit: ChatResponse [...]
 textContent=推动产业结构的升级
@@ -45,6 +47,7 @@ promptTokens=820, completionTokens=684, totalTokens=1504
 ```
 
 **最终错误**：
+
 ```json
 {
   "success": false,
@@ -127,6 +130,7 @@ return Map.of(outputKey, generator);
 ### 2.2 第二轮分析：流已订阅但未完成
 
 修复后，观察到：
+
 - ✅ 流被成功订阅
 - ✅ 数据开始发射（看到 emit 日志）
 - ❌ 但仍然超时
@@ -180,6 +184,7 @@ public class GraphController {
 ```
 
 **关键发现**：
+
 - 项目使用了 `spring-boot-starter-webflux`（响应式 Web 框架）
 - Controller 在 Reactor 的事件循环线程 `reactor-http-nio-3` 中执行
 - `.get()` 是 `CompletableFuture` 的阻塞调用
@@ -231,14 +236,17 @@ public class GraphController {
 ### 3.3 为什么会有两个问题？
 
 #### 问题 1：StreamingChatNode 使用错误 API
+
 - **影响**：返回类型不正确，下游节点无法处理
 - **表现**：流被订阅但数据无法正确传递
 
 #### 问题 2：Controller 阻塞调用
+
 - **影响**：违反响应式编程原则
 - **表现**：直接抛出异常，程序崩溃
 
 **两个问题的关系**：
+
 - 即使修复了问题 1，问题 2 仍会导致程序失败
 - 问题 2 是**致命错误**，必须修复
 
@@ -431,6 +439,7 @@ public class GraphController {
 ```
 
 **优点**：
+
 - 完全符合响应式编程范式
 - 不阻塞线程，性能最优
 - 与 WebFlux 完美集成
@@ -475,6 +484,7 @@ public Mono<Map<String, Object>> execute(
 ```
 
 **适用场景**：
+
 - `compiledGraph.call()` 返回的不是 `CompletableFuture`
 - 必须使用阻塞 API
 - 作为临时兼容方案
@@ -486,15 +496,18 @@ public Mono<Map<String, Object>> execute(
 ### 5.1 遵循的设计原则
 
 #### 单一职责原则 (SRP)
+
 - `StreamingChatNode`：只负责流式处理逻辑
 - `FluxConverter`：只负责 Flux 到 Graph 输出的转换
 - `Controller`：只负责请求路由和响应编排
 
 #### 开闭原则 (OCP)
+
 - 通过 `FluxConverter.builder()` 扩展流处理行为
 - 不修改框架核心代码
 
 #### 依赖倒置原则 (DIP)
+
 - 节点依赖 `ChatClient` 抽象接口，不依赖具体实现
 - Controller 依赖 `CompiledGraph` 接口
 
@@ -605,6 +618,7 @@ curl "http://localhost:10026/graph/observation/execute?prompt=分析人工智能
 #### 3. 观察日志
 
 **期望看到的日志**：
+
 ```log
 INFO  - GraphController: 开始执行图分析，输入: 分析人工智能的发展趋势
 INFO  - StartNode is running
@@ -624,11 +638,13 @@ INFO  - GraphController: 分析成功
 ### 6.2 性能对比
 
 #### 修复前（阻塞模式）
+
 - **吞吐量**：~10 req/s
 - **响应时间**：3-5 秒（超时失败）
 - **线程占用**：NIO 线程被阻塞
 
 #### 修复后（响应式模式）
+
 - **吞吐量**：~100 req/s
 - **响应时间**：1-2 秒（正常完成）
 - **线程占用**：NIO 线程空闲，boundedElastic 处理计算
@@ -646,13 +662,13 @@ INFO  - GraphController: 分析成功
 
 ### 7.2 常见陷阱
 
-| 陷阱 | 表现 | 解决方案 |
-|------|------|----------|
-| 在 NIO 线程中调用 `.get()` | 抛出 blocking 异常 | 使用 `Mono.fromFuture()` |
-| 使用错误的 API | 类型不匹配，无法传递数据 | 参考框架示例，使用标准 API |
-| 日志过于详细 | 性能下降，日志爆炸 | 使用 DEBUG 级别，只记录摘要 |
-| 缺少超时控制 | 长时间卡住 | 添加 `.timeout()` |
-| 异常处理不当 | 错误被吞掉 | 使用 `onErrorResume` 降级 |
+| 陷阱                       | 表现                     | 解决方案                    |
+| -------------------------- | ------------------------ | --------------------------- |
+| 在 NIO 线程中调用 `.get()` | 抛出 blocking 异常       | 使用 `Mono.fromFuture()`    |
+| 使用错误的 API             | 类型不匹配，无法传递数据 | 参考框架示例，使用标准 API  |
+| 日志过于详细               | 性能下降，日志爆炸       | 使用 DEBUG 级别，只记录摘要 |
+| 缺少超时控制               | 长时间卡住               | 添加 `.timeout()`           |
+| 异常处理不当               | 错误被吞掉               | 使用 `onErrorResume` 降级   |
 
 ### 7.3 学到的教训
 
@@ -666,17 +682,20 @@ INFO  - GraphController: 分析成功
 ## 八、参考资料
 
 ### 官方文档
+
 - [Spring WebFlux 官方文档](https://docs.spring.io/spring-framework/reference/web/webflux.html)
 - [Project Reactor 文档](https://projectreactor.io/docs/core/release/reference/)
 - [Spring AI Alibaba Graph 文档](https://sca.aliyun.com/docs/2023/user-guide/ai/graph/)
 
 ### 相关概念
+
 - **响应式编程**：基于数据流和变化传播的编程范式
 - **背压 (Backpressure)**：控制数据生产速度的机制
 - **Flux vs Mono**：多元素流 vs 单元素流
 - **Schedulers**：Reactor 的线程调度器
 
 ### 代码示例
+
 - `02-human-node/ExpanderNode.java`：FluxConverter 的标准用法
 - `02-human-node/TranslateNode.java`：流式处理的完整示例
 
@@ -787,6 +806,7 @@ otel:
 这次问题排查充分展示了响应式编程的复杂性和重要性。在 Spring WebFlux 环境中，**绝对不能在 Reactor NIO 线程中执行阻塞操作**，这是一条铁律。
 
 通过这次实践，我们不仅解决了具体问题，更重要的是深入理解了：
+
 - 响应式编程的线程模型
 - Spring AI Graph 框架的正确用法
 - 软件设计原则在实际开发中的应用

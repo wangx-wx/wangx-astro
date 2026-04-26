@@ -26,34 +26,34 @@ Git 的工作流程围绕四个主要区域展开：
 3. **本地仓库（Local Repository）** - 项目的历史记录，包含了所有已提交的更改。执行 `git commit` 命令时，Git 会将暂存区中的内容创建一个新的提交
 4. **远程仓库（Remote Repository）** - 托管在互联网上或网络中的仓库，通常用于团队协作
 
-
 ## 基础配置
 
 > **提示**：命令中加入 `--global` 就是全局操作，否则需要在对应项目目录下执行
 
-### 配置用户信息  
+### 配置用户信息
 
 全局配置使用者信息，用于提交工作时，展示个人信息
+
 ```bash
 # 全局配置使用者信息，用于提交工作时展示个人信息
 git config --global user.name "ideal"
 git config --global user.email "example@ideal.com"
 ```
 
-### 初始化仓库  
+### 初始化仓库
 
 ```bash
 git init
 ```
 
-### 克隆远程仓库  
+### 克隆远程仓库
 
 克隆分为两种方式：`HTTPS` 和 `SSH` 克隆，主要区别如下：
 
-| 克隆方式 | 认证方式 | 适用场景 | 优势 | 劣势 |
-|---------|---------|----------|------|------|
-| HTTPS | 用户名 + 密码 | 临时访问或不想配置 SSH 密钥 | 易用，无需额外配置 SSH 密钥 | 每次操作可能需要输入凭据 |
-| SSH | SSH 密钥认证 | 长期开发和高安全性需求 | 免密码推拉代码，安全性更高 | 需要配置 SSH 密钥 |
+| 克隆方式 | 认证方式      | 适用场景                    | 优势                        | 劣势                     |
+| -------- | ------------- | --------------------------- | --------------------------- | ------------------------ |
+| HTTPS    | 用户名 + 密码 | 临时访问或不想配置 SSH 密钥 | 易用，无需额外配置 SSH 密钥 | 每次操作可能需要输入凭据 |
+| SSH      | SSH 密钥认证  | 长期开发和高安全性需求      | 免密码推拉代码，安全性更高  | 需要配置 SSH 密钥        |
 
 ```bash
 # 生成 SSH 密钥
@@ -89,7 +89,8 @@ Changes not staged for commit:
 
 ### 添加文件到暂存区
 
-暂存区是一个临时的区域，用于保存你对文件的更改，可以将它理解为一个“准备提交”的区域  
+暂存区是一个临时的区域，用于保存你对文件的更改，可以将它理解为一个“准备提交”的区域
+
 ```bash
 # 添加一个指定文件至暂存区
 git add 文件名
@@ -111,22 +112,23 @@ git commit -m "提交说明"
 
 提交说明应按照规范编写，常见规则如下：
 
-| 类型 | 类别 | 说明 |
-|------|------|------|
-| `feat` | Production | 新增功能 |
-| `fix` | Production | Bug 修复 |
-| `perf` | Production | 提高代码性能的变更 |
-| `style` | Development | 代码样式修改（缩进、空格、空行等） |
-| `refactor` | Production | 重构代码（修改结构、变量名、函数名但不修改功能逻辑） |
-| `test` | Development | 修改测试用例 |
-| `ci` | Development | 修改持续集成流程（Travis、Jenkins 等工作流配置） |
-| `docs` | Development | 修改文档（README 文件、API 文档等） |
-| `chore` | Development | 非业务性代码修改（构建流程或工具配置等） |
-| `build` | Development | 修改项目构建系统（依赖库、外部接口等） |
+| 类型       | 类别        | 说明                                                 |
+| ---------- | ----------- | ---------------------------------------------------- |
+| `feat`     | Production  | 新增功能                                             |
+| `fix`      | Production  | Bug 修复                                             |
+| `perf`     | Production  | 提高代码性能的变更                                   |
+| `style`    | Development | 代码样式修改（缩进、空格、空行等）                   |
+| `refactor` | Production  | 重构代码（修改结构、变量名、函数名但不修改功能逻辑） |
+| `test`     | Development | 修改测试用例                                         |
+| `ci`       | Development | 修改持续集成流程（Travis、Jenkins 等工作流配置）     |
+| `docs`     | Development | 修改文档（README 文件、API 文档等）                  |
+| `chore`    | Development | 非业务性代码修改（构建流程或工具配置等）             |
+| `build`    | Development | 修改项目构建系统（依赖库、外部接口等）               |
 
 **推荐格式**：`git commit -m "类型: 提交说明"`
 
 **示例**：
+
 - `git commit -m "feat: 完成用户登录功能"`
 - `git commit -m "fix: 修复登录页面样式问题"`
 
@@ -137,10 +139,11 @@ git commit -m "提交说明"
 **已提交但未推送，需要取消提交：**
 
 1. `git reset --soft HEAD~1` - 软重置，只撤销最后一次提交并保留在暂存区
-2. `git reset --mixed HEAD~1` - 混合重置，撤销最后一次提交并将暂存区的文件撤销至工作区  
+2. `git reset --mixed HEAD~1` - 混合重置，撤销最后一次提交并将暂存区的文件撤销至工作区
 3. `git reset --hard HEAD~1` - 硬重置，撤销最后一次提交的所有内容，**慎用**
 
 **已提交已推送，需要修改提交信息：**
+
 ```bash
 # 修改最近一次提交信息
 git commit --amend -m "..."
@@ -152,6 +155,7 @@ git push origin main --force-with-lease
 ```
 
 ### 查看提交历史
+
 ```bash
 git log
 
@@ -160,6 +164,7 @@ git log --oneline --graph --decorate --all
 ```
 
 ### 远程操作
+
 ```bash
 # 推送并设置推送到哪一个分支
 git push -u origin <branch_name>
@@ -176,6 +181,7 @@ git pull origin branch_name
 Git 分支管理是版本控制系统中非常重要的一个方面，它允许开发者在不同的分支上独立工作
 
 ### 查看分支
+
 ```bash
 # 查看本地分支，当前分支有星号（*）
 git branch
@@ -202,20 +208,22 @@ git branch -m new_branch_name
 # 查看分支详细信息
 git branch -vv
 ```
+
 ### 分支命名规范
 
 在实际开发中，创建项目新分支一般在**代码托管平台上操作**。分支命名需要规范，实际应遵循公司规定：
 
-| 分支类型 | 命名格式 | 示例 | 描述 |
-|---------|----------|------|------|
-| 主分支 | `main` / `master` | `main` | 主分支，线上稳定版本 |
-| 功能分支 | `feature/feature-name` | `feature/user-authentication` | 用于新功能开发 |
-| 修复分支 | `bugfix/bug-name` | `bugfix/login-error` | 用于修复问题 |
-| 发布分支 | `release/version-number` | `release/v1.2.0` | 用于版本发布 |
-| 热修复分支 | `hotfix/hotfix-name` | `hotfix/critical-security-patch` | 用于紧急修复生产环境问题 |
-| 测试分支 | `test/test-name` | `test/integration-tests` | 用于专门的测试工作 |
+| 分支类型   | 命名格式                 | 示例                             | 描述                     |
+| ---------- | ------------------------ | -------------------------------- | ------------------------ |
+| 主分支     | `main` / `master`        | `main`                           | 主分支，线上稳定版本     |
+| 功能分支   | `feature/feature-name`   | `feature/user-authentication`    | 用于新功能开发           |
+| 修复分支   | `bugfix/bug-name`        | `bugfix/login-error`             | 用于修复问题             |
+| 发布分支   | `release/version-number` | `release/v1.2.0`                 | 用于版本发布             |
+| 热修复分支 | `hotfix/hotfix-name`     | `hotfix/critical-security-patch` | 用于紧急修复生产环境问题 |
+| 测试分支   | `test/test-name`         | `test/integration-tests`         | 用于专门的测试工作       |
 
 ### 切换分支
+
 ```bash
 # 切换分支
 git checkout branch_name
@@ -226,6 +234,7 @@ git checkout -b 本地分支名 origin/远程分支名
 ```
 
 ### 合并分支
+
 ```bash
 # 切换到主分支，将 branch_name 合并至主分支
 git merge branch_name
@@ -241,32 +250,34 @@ git rebase branch_name
 `git merge` 和 `git rebase` 都是 Git 中用于整合不同分支更改的命令，但它们的工作方式和产生的结果有所不同。
 
 #### Git Merge
-将两个分支的更改合并成一个新的`合并提交`（merge commit），并且保留两者的历史。  
+
+将两个分支的更改合并成一个新的`合并提交`（merge commit），并且保留两者的历史。
 
 合并的结果是创建一个新的提交，该提交有`两个父提交`，即原本分支的最后一个提交和目标分支的最后一个提交。
 
 #### Git Rebase
-会将当前分支上的提交 “**移动**” 到目标分支的**最前面**，即将当前分支的每个提交“重放”在目标分支的最新提交上  
+
+会将当前分支上的提交 “**移动**” 到目标分支的**最前面**，即将当前分支的每个提交“重放”在目标分支的最新提交上
 
 会改变分支的历史记录，因此它看起来像是当前分支的所有提交是在目标分支的基础上做的
 
 #### 主要区别
 
-| 特点 | Merge | Rebase |
-|------|-------|--------|
-| **历史记录** | 保留两个分支的历史，生成合并提交 | 修改提交历史，将当前分支提交"重放"到目标分支前面 |
-| **提交图** | 生成合并提交，历史呈现分支结构 | 历史呈现线性结构，无合并提交 |
-| **操作结果** | 生成新的合并提交，保留各分支历史 | 当前分支提交移到目标分支前面 |
-| **适用场景** | 团队协作，需要保留所有分支提交记录 | 个人分支或希望清理提交历史 |
-| **对公共分支影响** | 不改变历史，适合团队合作 | 改变历史，不推荐在公共分支使用 |
+| 特点               | Merge                              | Rebase                                           |
+| ------------------ | ---------------------------------- | ------------------------------------------------ |
+| **历史记录**       | 保留两个分支的历史，生成合并提交   | 修改提交历史，将当前分支提交"重放"到目标分支前面 |
+| **提交图**         | 生成合并提交，历史呈现分支结构     | 历史呈现线性结构，无合并提交                     |
+| **操作结果**       | 生成新的合并提交，保留各分支历史   | 当前分支提交移到目标分支前面                     |
+| **适用场景**       | 团队协作，需要保留所有分支提交记录 | 个人分支或希望清理提交历史                       |
+| **对公共分支影响** | 不改变历史，适合团队合作           | 改变历史，不推荐在公共分支使用                   |
 
 #### 使用场景
 
 - **使用 merge**：当希望保留分支的历史，尤其是多人协作时，merge 是更好的选择
 - **使用 rebase**：当需要让历史保持线性，或者在个人分支上工作时，rebase 会让提交历史更简洁
 
-
 ### 删除分支
+
 ```bash
 # 删除本地分支
 git branch -d branch_name
@@ -279,6 +290,7 @@ git push origin --delete branch_name
 ```
 
 ### 分支比较
+
 ```bash
 # 查看两个分支之间的差异
 git diff branch_name_a branch_name_b
@@ -286,7 +298,6 @@ git diff branch_name_a branch_name_b
 # 查看分支日志差异
 git log branch_name_a..branch_name_b
 ```
-
 
 ## 版本回滚
 
@@ -308,18 +319,21 @@ git checkout <目标版本号>
 # 本地回滚但保留代码
 git reset --soft <目标版本号>
 ```
+
 回滚到<目标版本号>，但 **保留代码和暂存区的内容**，仅撤销后续的提交记录。适用于想撤销提交但保留文件修改，可以重新提交
 
 ```bash
 # 本地回滚并清除暂存区
 git reset --mixed <目标版本号>
 ```
+
 **撤销提交**，但代码仍然保留在工作区（未 add 但代码还在）。 **适用于**希望回滚提交，并重新`add`需要的文件
 
 ```bash
 # 彻底回滚（删除提交）
 git reset --hard <目标版本号>
 ```
+
 完全回滚，让代码、暂存区、提交历史全部恢复到**<目标版本号>**，后续提交会被删除。**适用于**彻底恢复到某个版本，不想保留后续的更改
 
 ### 回滚远程仓库（谨慎操作）
@@ -349,8 +363,9 @@ git log --since="2025-01-01" --until="2025-03-01" --pretty=oneline | wc -l
 ```
 
 **参数说明：**
+
 - `--since="2025-01-01"`：指定开始时间
-- `--until="2025-02-01"`：指定结束时间  
+- `--until="2025-02-01"`：指定结束时间
 - `--pretty=oneline`：将每个提交显示为一行
 - `wc -l`：统计提交的行数（即提交的次数）
 
@@ -367,6 +382,7 @@ git log --since="2025-01-01" --until="2025-03-01" --pretty=format:"%s" | grep -E
 ```
 
 **参数说明：**
+
 - `--pretty=format:"%s"`：只输出提交的标题（即提交信息）
 - `grep -E "^(feat|fix|docs|chore|style|refactor|test)"`：通过正则表达式筛选出特定类别的提交
 - `sort`：对提交类别进行排序
@@ -383,9 +399,9 @@ git log --since="2025-01-01" --until="2025-03-01" --pretty=format:"%s" | \
 ```
 
 **参数说明：**
+
 - `grep -Eo "^(feat|fix|docs|chore|style|refactor|test)"`：只提取符合条件的类别标签
 - `sort -nr`：按降序排序，最频繁的类别会排在前面
-
 
 ### 常用工作流技巧
 
@@ -405,7 +421,6 @@ git add .
 git commit -m "resolve conflicts"
 git push
 ```
-
 
 ### Git Stash 详细用法
 
@@ -478,6 +493,7 @@ git branch -d feature/user-profile   # 删除本地分支
 ### 常见问题解决方案
 
 #### 忘记切换分支就开发了
+
 ```bash
 # 方法一：使用 stash
 git stash                           # 保存当前工作
@@ -489,6 +505,7 @@ git checkout -b correct-branch      # 直接在当前状态创建新分支
 ```
 
 #### 提交到了错误的分支
+
 ```bash
 # 将最后一次提交移到正确的分支
 git log --oneline -5                # 查看最近的提交
@@ -501,6 +518,7 @@ git commit -m "移动到正确分支的提交"
 ```
 
 #### 合并冲突解决
+
 ```bash
 # 当出现合并冲突时
 git status                          # 查看冲突文件

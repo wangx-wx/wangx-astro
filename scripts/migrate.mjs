@@ -129,7 +129,7 @@ for (const file of files) {
   const raw = readFileSync(join(SRC_DIR, file), "utf8");
   const match = /^\+\+\+\s*\n([\s\S]*?)\n\+\+\+\s*\n?([\s\S]*)$/.exec(raw);
   if (!match) {
-    console.warn(`[skip] ${file}: no TOML front matter`);
+    process.stderr.write(`[skip] ${file}: no TOML front matter\n`);
     continue;
   }
   const fm = parseToml(match[1]);
@@ -153,9 +153,9 @@ for (const file of files) {
     `${toYaml(fmOut)}\n\n${withToc}`,
     "utf8"
   );
-  console.log(
-    `[ok] ${file} | tags: [${tags.join(", ")}] | toc: ${hasH2 ? "yes" : "no"} | desc: "${description.slice(0, 40)}..."`
+  process.stdout.write(
+    `[ok] ${file} | tags: [${tags.join(", ")}] | toc: ${hasH2 ? "yes" : "no"} | desc: "${description.slice(0, 40)}..."\n`
   );
   ok++;
 }
-console.log(`\nmigrated ${ok}/${files.length} files`);
+process.stdout.write(`\nmigrated ${ok}/${files.length} files\n`);
